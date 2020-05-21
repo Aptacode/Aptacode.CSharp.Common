@@ -1,4 +1,5 @@
-﻿namespace Aptacode.CSharp.Utilities.Persistence
+﻿
+namespace Aptacode.CSharp.Utilities.Persistence
 {
     public class EntityBase
     {

@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net4.7.2;netcoreapp3.1</TargetFrameworks>    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Timothy Jones</Authors>
+    <Authors>Aptacode</Authors>
     <Company>Aptacode</Company>
     <Description>A Collection of helpful C# Utilities used in Aptacode's OpenSource libraries</Description>
     <PackageProjectUrl>https://github.com/Timmoth/Aptacode.CSharp.Utilities</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Timmoth/Aptacode.CSharp.Utilities</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0.2</Version>
+    <Version>1.0.0.3</Version>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
   </PropertyGroup>
 
 </Project>

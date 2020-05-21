@@ -16,6 +16,6 @@ namespace Aptacode.CSharp.Utilities.Persistence.Repository
 
         Task Delete(int id);
 
-        IQueryable AsQueryable();
+        IQueryable<TEntity> AsQueryable();
     }
 }
