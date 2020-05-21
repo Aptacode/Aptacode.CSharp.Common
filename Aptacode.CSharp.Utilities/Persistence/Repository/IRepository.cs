@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Aptacode.CSharp.Utilities.Persistence.Repository
@@ -14,5 +15,7 @@ namespace Aptacode.CSharp.Utilities.Persistence.Repository
         Task<TEntity> Get(int id);
 
         Task Delete(int id);
+
+        IQueryable AsQueryable();
     }
 }

@@ -6,7 +6,7 @@ namespace Aptacode.CSharp.Utilities.Extensions
 {
     public static class EnumerableExtensions
     {
-        private static readonly Random Rng = new Random(Guid.NewGuid().GetHashCode());
+        private static readonly Random Rng = new Random();
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
