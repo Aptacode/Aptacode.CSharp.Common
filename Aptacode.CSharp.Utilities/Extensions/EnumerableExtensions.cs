@@ -19,5 +19,10 @@ namespace Aptacode.CSharp.Utilities.Extensions
                 buffer[j] = buffer[i];
             }
         }
+
+        public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int count)
+        {
+            return source.Skip(Math.Max(0, source.Count() - count));
+        }
     }
 }

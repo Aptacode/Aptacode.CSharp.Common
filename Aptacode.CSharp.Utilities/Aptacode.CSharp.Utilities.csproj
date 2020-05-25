@@ -9,8 +9,12 @@
     <RepositoryUrl>https://github.com/Timmoth/Aptacode.CSharp.Utilities</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0.3</Version>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <Version>1.0.0.4</Version>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\UnitOfWork\" />
+  </ItemGroup>
 
 </Project>
