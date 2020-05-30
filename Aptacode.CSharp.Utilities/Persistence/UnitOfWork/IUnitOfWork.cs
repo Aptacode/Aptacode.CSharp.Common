@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Aptacode.CSharp.Utilities.Persistence
+namespace Aptacode.CSharp.Utilities.Persistence.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
