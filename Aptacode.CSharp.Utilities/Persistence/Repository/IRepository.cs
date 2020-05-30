@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Aptacode.CSharp.Utilities.Persistence.Repository
 {
-    public interface IRepository<TEntity> where TEntity : EntityBase
+    public interface IRepository<TEntity> where TEntity : IEntityBase
     {
         Task<int> Create(TEntity entity);
 

@@ -1,8 +1,8 @@
 ﻿
 namespace Aptacode.CSharp.Utilities.Persistence
 {
-    public class EntityBase
+    public interface IEntityBase
     {
-        public int Id { get; set; }
+        int Id { get; set; }
     }
 }
