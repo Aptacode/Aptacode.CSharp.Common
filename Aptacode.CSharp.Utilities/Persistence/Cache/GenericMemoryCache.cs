@@ -20,10 +20,7 @@ namespace Aptacode.CSharp.Utilities.Persistence.Cache
 
         public async Task<TValue> GetOrCreate(TKey key, Func<Task<TValue>> createItem)
         {
-            if (_cache.TryGetValue(key, out TValue cacheEntry))
-            {
-                return cacheEntry;
-            }
+            if (_cache.TryGetValue(key, out TValue cacheEntry)) return cacheEntry;
 
             // Key not in cache, so get data.
             cacheEntry = await createItem().ConfigureAwait(false);
