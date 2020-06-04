@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aptacode.CSharp.Utilities.Extensions
+namespace Aptacode.CSharp.Common.Utillities.Extensions
 {
     public static class EnumerableExtensions
     {

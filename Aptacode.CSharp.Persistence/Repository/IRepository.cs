@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Aptacode.CSharp.Utilities.Persistence.Repository
+namespace Aptacode.CSharp.Common.Persistence.Repository
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {

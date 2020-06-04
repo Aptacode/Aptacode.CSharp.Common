@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aptacode.CSharp.Utilities.Persistence.Repository;
+using Aptacode.CSharp.Common.Persistence.Repository;
 
-namespace Aptacode.CSharp.Utilities.Persistence.UnitOfWork
+namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
 {
     public abstract class GenericUnitOfWork : IGenericUnitOfWork
     {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Aptacode.CSharp.Utilities.Persistence.Cache
+namespace Aptacode.CSharp.Common.Persistence.Cache
 {
     public class GenericMemoryCache<TKey, TValue>
     {
