@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aptacode.CSharp.Persistence\Aptacode.CSharp.Common.Persistence.csproj" />
+    <ProjectReference Include="..\Aptacode.CSharp.Common.Persistence\Aptacode.CSharp.Common.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
