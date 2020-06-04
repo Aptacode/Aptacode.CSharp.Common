@@ -1,4 +1,4 @@
-﻿namespace Aptacode.CSharp.Utilities.Persistence
+﻿namespace Aptacode.CSharp.Common.Persistence
 {
     public interface IEntity
     {

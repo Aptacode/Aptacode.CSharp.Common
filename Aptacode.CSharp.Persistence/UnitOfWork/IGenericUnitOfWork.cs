@@ -1,6 +1,6 @@
-﻿using Aptacode.CSharp.Utilities.Persistence.Repository;
+﻿using Aptacode.CSharp.Common.Persistence.Repository;
 
-namespace Aptacode.CSharp.Utilities.Persistence.UnitOfWork
+namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
 {
     public interface IGenericUnitOfWork : IUnitOfWork
     {

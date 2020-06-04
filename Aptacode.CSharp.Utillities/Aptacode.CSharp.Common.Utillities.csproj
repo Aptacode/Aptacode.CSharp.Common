@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net4.6.1;netcoreapp3.1</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Aptacode</Authors>
+    <Company>Aptacode</Company>
+    <Description>A Collection of helpful C# Utilities used in Aptacode's OpenSource libraries</Description>
+    <PackageProjectUrl>https://github.com/Timmoth/Aptacode.CSharp.Common</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timmoth/Aptacode.CSharp.Common</RepositoryUrl>
+    <Copyright>MIT</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <LangVersion>8.0</LangVersion>
+    <PackageIconUrl />
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageIcon>logo.png</PackageIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Images\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

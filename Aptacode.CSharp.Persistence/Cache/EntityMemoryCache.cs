@@ -1,4 +1,4 @@
-﻿namespace Aptacode.CSharp.Utilities.Persistence.Cache
+﻿namespace Aptacode.CSharp.Common.Persistence.Cache
 {
     public class EntityMemoryCache<TEntity> : GenericMemoryCache<int, TEntity> where TEntity : IEntity
     {
