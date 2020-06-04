@@ -8,7 +8,7 @@ namespace Aptacode.CSharp.Common.Utillities.Extensions
         public static TCol AddRange<TCol, TItem>(this TCol destination, IEnumerable<TItem> source)
             where TCol : ICollection<TItem>
         {
-            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            if (destination == null) throw new NullReferenceException(nameof(destination));
 
             if (source == null) throw new ArgumentNullException(nameof(source));
 
