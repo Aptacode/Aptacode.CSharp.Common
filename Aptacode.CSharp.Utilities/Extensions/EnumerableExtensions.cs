@@ -22,7 +22,8 @@ namespace Aptacode.CSharp.Utilities.Extensions
 
         public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int count)
         {
-            return source.Skip(Math.Max(0, source.Count() - count));
+            var tempList = source as T[] ?? source.ToArray();
+            return tempList.Skip(Math.Max(0, tempList.Length - count));
         }
     }
 }
