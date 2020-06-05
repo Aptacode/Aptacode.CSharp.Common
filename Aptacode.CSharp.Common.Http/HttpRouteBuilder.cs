@@ -7,7 +7,7 @@
         public HttpRouteBuilder(ServerAddress serverAddress, params object[] baseRouteSegments)
         {
             ServerAddress = serverAddress;
-            ApiBaseRoute = $"{serverAddress}{string.Join(RouteSeparator, baseRouteSegments)}";
+            ApiBaseRoute = $"{serverAddress}{string.Join(RouteSeparator, baseRouteSegments)}{(baseRouteSegments.Length > 0 ? RouteSeparator : string.Empty)}";
         }
 
         public string ApiBaseRoute { get; }
@@ -15,5 +15,7 @@
 
         public string BuildRoute(params object[] routeSegments) =>
             $"{ApiBaseRoute}{string.Join(RouteSeparator, routeSegments)}";
+
+        public override string ToString() => ApiBaseRoute;
     }
 }
