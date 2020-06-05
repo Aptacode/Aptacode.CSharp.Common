@@ -13,9 +13,7 @@
         public string ApiBaseRoute { get; }
         public ServerAddress ServerAddress { get; }
 
-        public string BuildRoute(params object[] routeSegments)
-        {
-            return $"{ApiBaseRoute}{string.Join(RouteSeparator, routeSegments)}";
-        }
+        public string BuildRoute(params object[] routeSegments) =>
+            $"{ApiBaseRoute}{string.Join(RouteSeparator, routeSegments)}";
     }
 }

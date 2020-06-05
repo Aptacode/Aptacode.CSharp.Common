@@ -12,28 +12,19 @@ namespace Aptacode.CSharp.Common.Http.Services
         IRepository<TEntity>
         where TEntity : IEntity
     {
-        private readonly string[] _apiBaseRoute;
         private readonly IMapper _mapper;
         protected readonly EntityMemoryCache<TEntity> MemoryCache = new EntityMemoryCache<TEntity>();
 
         public GenericRestRepository(IAccessTokenService authService, ServerAddress serverAddress, IMapper mapper,
-            params string[] apiBaseRoute) : base(authService, serverAddress)
+            params object[] apiBaseRoute) : base(authService, serverAddress, apiBaseRoute)
         {
             _mapper = mapper;
-            _apiBaseRoute = apiBaseRoute;
-        }
-
-        private string[] IdRoute(int id)
-        {
-            var route = _apiBaseRoute.ToList();
-            route.Add(id.ToString());
-            return route.ToArray();
         }
 
         public async Task<int> Create(TEntity entity)
         {
             var viewmodel = _mapper.Map<TPutViewModel>(entity);
-            var result = await Put<TGetViewModel, TPutViewModel>(viewmodel, _apiBaseRoute).ConfigureAwait(false);
+            var result = await Put<TGetViewModel, TPutViewModel>(viewmodel).ConfigureAwait(false);
             var returnedEntity = _mapper.Map<TEntity>(result);
             MemoryCache.Update(returnedEntity);
 
@@ -44,17 +35,22 @@ namespace Aptacode.CSharp.Common.Http.Services
         {
             var viewmodel = _mapper.Map<TPutViewModel>(entity);
             var result =
-                await Post<TGetViewModel, TPutViewModel>(viewmodel, IdRoute(entity.Id)).ConfigureAwait(false);
+                await Post<TGetViewModel, TPutViewModel>(viewmodel, entity.Id).ConfigureAwait(false);
             MemoryCache.Update(_mapper.Map<TEntity>(result));
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            var result = await base.GetAll<TGetViewModel>(_apiBaseRoute).ConfigureAwait(false);
+            var result = await base.GetAll<TGetViewModel>().ConfigureAwait(false);
 
-            var entities = result.Select(r => _mapper.Map<TEntity>(r));
+            if (result == null)
+            {
+                return null;
+            }
 
-            foreach (var entity in entities) MemoryCache.Update(entity);
+            var entities = result.Select(r => _mapper.Map<TEntity>(r)).ToList();
+
+            entities.ToList().ForEach(MemoryCache.Update);
 
             return entities;
         }
@@ -63,7 +59,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         {
             return await MemoryCache.GetOrCreate(id, async () =>
             {
-                var result = await base.Get<TGetViewModel>(IdRoute(id))
+                var result = await base.Get<TGetViewModel>(id)
                     .ConfigureAwait(false);
                 return _mapper.Map<TEntity>(result);
             }).ConfigureAwait(false);
@@ -71,14 +67,18 @@ namespace Aptacode.CSharp.Common.Http.Services
 
         public async Task Delete(int id)
         {
-            var result = await base.Delete(IdRoute(id)).ConfigureAwait(false);
-            if (result) MemoryCache.Remove(id);
+            var result = await base.Delete(id).ConfigureAwait(false);
+            if (result)
+            {
+                MemoryCache.Remove(id);
+            }
         }
 
         public IQueryable<TEntity> AsQueryable()
         {
-            var result = base.GetAll<TGetViewModel>(_apiBaseRoute).Result;
-            return result.Select(r => _mapper.Map<TEntity>(r)).AsQueryable();
+            var result = base.GetAll<TGetViewModel>().Result;
+
+            return result?.Select(r => _mapper.Map<TEntity>(r)).AsQueryable();
         }
     }
 }

@@ -9,9 +9,7 @@ namespace Aptacode.CSharp.Common.Persistence.Cache
         private readonly MemoryCache _cache;
         public TimeSpan RelativeExpiration = new TimeSpan(0, 10, 0);
 
-        public GenericMemoryCache() : this(new MemoryCacheOptions())
-        {
-        }
+        public GenericMemoryCache() : this(new MemoryCacheOptions()) { }
 
         public GenericMemoryCache(MemoryCacheOptions memoryCacheOptions)
         {
@@ -20,7 +18,10 @@ namespace Aptacode.CSharp.Common.Persistence.Cache
 
         public async Task<TValue> GetOrCreate(TKey key, Func<Task<TValue>> createItem)
         {
-            if (_cache.TryGetValue(key, out TValue cacheEntry)) return cacheEntry;
+            if (_cache.TryGetValue(key, out TValue cacheEntry))
+            {
+                return cacheEntry;
+            }
 
             // Key not in cache, so get data.
             cacheEntry = await createItem().ConfigureAwait(false);

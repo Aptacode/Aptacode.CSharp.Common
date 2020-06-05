@@ -17,7 +17,10 @@ namespace Aptacode.CSharp.Common.Http
                 stringBuilder.Append("://");
             }
 
-            if (string.IsNullOrEmpty(Address)) return string.Empty;
+            if (string.IsNullOrEmpty(Address))
+            {
+                return string.Empty;
+            }
 
             stringBuilder.Append(Address);
             if (!string.IsNullOrEmpty(Port))

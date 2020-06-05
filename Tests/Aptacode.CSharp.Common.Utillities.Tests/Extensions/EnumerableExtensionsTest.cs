@@ -11,7 +11,7 @@ namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
         public void CanShuffle()
         {
             //Arrange
-            var sut = new List<int>{1,2,3,4,5,6,7,8,9,10};
+            var sut = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             //Act
             var result1 = sut.Shuffle().ToList();
@@ -35,7 +35,7 @@ namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
         public void CanTakeLast0()
         {
             //Arrange
-            var sut = new List<int> { 1,2,3,4,5,6,7,8,9,10 };
+            var sut = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             //Act
             var emptyList = EnumerableExtensions.TakeLast(sut, 0);
@@ -48,20 +48,20 @@ namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
         public void CanTakeLast1()
         {
             //Arrange
-            var sut = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var sut = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             //Act
-            var actual =  EnumerableExtensions.TakeLast(sut, 1);
+            var actual = EnumerableExtensions.TakeLast(sut, 1);
 
             //Assert
-            Assert.Equal(new List<int>(){10}, actual);
+            Assert.Equal(new List<int> {10}, actual);
         }
 
         [Fact]
         public void CanTakeLast10()
         {
             //Arrange
-            var sut = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var sut = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             //Act
             var actual = EnumerableExtensions.TakeLast(sut, 10);

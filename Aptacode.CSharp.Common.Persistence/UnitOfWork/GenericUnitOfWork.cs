@@ -13,10 +13,15 @@ namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
         public IRepository<TEntity> Repository<TEntity>() where TEntity : IEntity
         {
             if (_repositories.Keys.Contains(typeof(TEntity)))
+            {
                 return _repositories[typeof(TEntity)] as IRepository<TEntity>;
+            }
 
             var repo = CreateRepository<TEntity>();
-            if (repo != null) SetRepository(repo);
+            if (repo != null)
+            {
+                SetRepository(repo);
+            }
 
             return repo;
         }
