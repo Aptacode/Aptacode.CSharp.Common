@@ -23,11 +23,15 @@ namespace Aptacode.CSharp.Common.Http
             }
 
             stringBuilder.Append(Address);
+
             if (!string.IsNullOrEmpty(Port))
             {
                 stringBuilder.Append(":");
                 stringBuilder.Append(Port);
             }
+
+            stringBuilder.Append("/");
+
 
             return stringBuilder.ToString();
         }
