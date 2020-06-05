@@ -58,7 +58,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         protected async Task<TGetViewModel> Post<TGetViewModel, TPutViewModel>(TPutViewModel entity,
             params string[] routeSegments)
         {
-            var req = GetRequestTemplate(HttpMethod.Put, ApiRouteBuilder.BuildRoute(routeSegments));
+            var req = GetRequestTemplate(HttpMethod.Post, ApiRouteBuilder.BuildRoute(routeSegments));
             req.Content = new StringContent(JsonConvert.SerializeObject(entity));
             var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode) return default;
