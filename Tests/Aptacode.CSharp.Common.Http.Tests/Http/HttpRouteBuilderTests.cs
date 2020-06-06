@@ -1,31 +1,25 @@
+using Aptacode.CSharp.Common.Http.Tests.Http.TestData;
 using Xunit;
 
 namespace Aptacode.CSharp.Common.Http.Tests.Http
 {
     public class HttpRouteBuilderTests
     {
-        private readonly ServerAddress _testAddress = new ServerAddress()
-            {Protocol = "https", Address = "aptacode.com", Port = "80"};
-
-        [Fact]
-        public void BaseRouteToStringTest()
+        [Theory]
+        [ClassData(typeof(HttpRouteBuilderBuildRouteTestData))]
+        public void BuildRouteTests(ServerAddress serverAddress, object[] baseComponents, object[] extraComponents,
+            string expectedAddress)
         {
-            var sut = new HttpRouteBuilder(_testAddress, "api","test");
-            Assert.Equal("https://aptacode.com:80/api/test/", sut.ToString());
+            var sut = new HttpRouteBuilder(serverAddress, baseComponents);
+            Assert.Equal(expectedAddress, sut.BuildRoute(extraComponents));
         }
 
-        [Fact]
-        public void BuildRouteTest()
+        [Theory]
+        [ClassData(typeof(HttpRouteBuilderToStringTestData))]
+        public void ToStringTests(ServerAddress serverAddress, object[] baseComponents, string expectedAddress)
         {
-            var sut = new HttpRouteBuilder(_testAddress, "api", "test");
-            Assert.Equal("https://aptacode.com:80/api/test/users/names", sut.BuildRoute("users","names"));
-        }
-
-        [Fact]
-        public void EmptyBuildRouteTest()
-        {
-            var sut = new HttpRouteBuilder(_testAddress, "api", "test");
-            Assert.Equal("https://aptacode.com:80/api/test/", sut.BuildRoute());
+            var sut = new HttpRouteBuilder(serverAddress, baseComponents);
+            Assert.Equal(expectedAddress, sut.ToString());
         }
     }
 }
