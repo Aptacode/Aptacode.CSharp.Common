@@ -10,11 +10,11 @@
     <RepositoryUrl>https://github.com/Timmoth/Aptacode.CSharp.Common</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0.9</Version>
-    <AssemblyVersion>1.0.0.9</AssemblyVersion>
+    <Version>1.0.0.10</Version>
+    <AssemblyVersion>1.0.0.10</AssemblyVersion>
     <LangVersion>8.0</LangVersion>
     <PackageIconUrl />
-    <FileVersion>1.0.0.9</FileVersion>
+    <FileVersion>1.0.0.10</FileVersion>
     <PackageIcon>logo.png</PackageIcon>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>

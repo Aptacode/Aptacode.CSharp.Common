@@ -28,6 +28,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 await HttpClient
                     .SendAsync(GetRequestTemplate(HttpMethod.Get, ApiRouteBuilder.BuildRoute(routeSegments)))
                     .ConfigureAwait(false);
+
             if (!response.IsSuccessStatusCode)
             {
                 return null;
@@ -95,7 +96,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         protected HttpRequestMessage GetRequestTemplate(HttpMethod method, string endpoint)
         {
             var accessToken = AuthService.GetAccessToken();
-            if (accessToken == null)
+            if (string.IsNullOrEmpty(accessToken))
             {
                 throw new Exception("You are not authorized to view this content");
             }
