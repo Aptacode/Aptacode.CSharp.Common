@@ -10,17 +10,18 @@
     <RepositoryUrl>https://github.com/Timmoth/Aptacode.CSharp.Common</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0.7</Version>
-    <AssemblyVersion>1.0.0.7</AssemblyVersion>
+    <Version>1.0.0.9</Version>
+    <AssemblyVersion>1.0.0.9</AssemblyVersion>
     <LangVersion>8.0</LangVersion>
     <PackageIconUrl />
-    <FileVersion>1.0.0.7</FileVersion>
+    <FileVersion>1.0.0.9</FileVersion>
     <PackageIcon>logo.png</PackageIcon>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.1|AnyCPU'">
     <OutputPath>..\bin\debug</OutputPath>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.1|AnyCPU'">
