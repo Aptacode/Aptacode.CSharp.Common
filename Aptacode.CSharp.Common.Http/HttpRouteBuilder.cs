@@ -15,7 +15,6 @@
 
         #endregion
 
-
         public string BuildRoute(params object[] routeSegments) =>
             $"{ApiBaseRoute}{string.Join(RouteSeparator, routeSegments)}{(routeSegments.Length > 0 ? RouteSeparator : string.Empty)}";
 

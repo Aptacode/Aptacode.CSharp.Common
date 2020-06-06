@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Aptacode.CSharp.Common.Http.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace Aptacode.CSharp.Common.Http.Services
@@ -56,7 +57,8 @@ namespace Aptacode.CSharp.Common.Http.Services
             params object[] routeSegments)
         {
             var req = GetRequestTemplate(HttpMethod.Put, ApiRouteBuilder.BuildRoute(routeSegments));
-            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, Aptacode.MimeTypes.MimeTypes.Application.Json.ToString());
+            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8,
+                MimeTypes.MimeTypes.Application.Json.ToString());
             var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
@@ -71,7 +73,8 @@ namespace Aptacode.CSharp.Common.Http.Services
             params object[] routeSegments)
         {
             var req = GetRequestTemplate(HttpMethod.Post, ApiRouteBuilder.BuildRoute(routeSegments));
-            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, Aptacode.MimeTypes.MimeTypes.Application.Json.ToString());
+            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8,
+                MimeTypes.MimeTypes.Application.Json.ToString());
             var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {

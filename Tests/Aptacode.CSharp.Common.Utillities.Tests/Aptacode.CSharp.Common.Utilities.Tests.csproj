@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Aptacode.CSharp.Common.Utillities\Aptacode.CSharp.Common.Utillities.csproj" />
+    <ProjectReference Include="..\..\Aptacode.CSharp.Common.Utillities\Aptacode.CSharp.Common.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

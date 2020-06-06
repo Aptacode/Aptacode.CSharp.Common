@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aptacode.CSharp.Common.Http.Services.Interfaces;
 using Aptacode.CSharp.Common.Persistence;
 using Aptacode.CSharp.Common.Persistence.Cache;
 using Aptacode.CSharp.Common.Persistence.Repository;

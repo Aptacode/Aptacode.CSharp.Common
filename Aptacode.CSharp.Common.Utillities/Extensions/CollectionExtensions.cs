@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Aptacode.CSharp.Common.Utillities.Extensions
+namespace Aptacode.CSharp.Common.Utilities.Extensions
 {
     public static class CollectionExtensions
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
+namespace Aptacode.CSharp.Common.Utilities.Tests.Extensions
 {
     public class CollectionExtensionsTest
     {

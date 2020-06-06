@@ -7,7 +7,6 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http.TestData
     {
         private static readonly ServerAddress ServerAddress = new ServerAddress(Protocol.http, "aptacode.com", 8080);
 
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[] {ServerAddress, new[] {"api", "users"}, "http://aptacode.com:8080/api/users/"}

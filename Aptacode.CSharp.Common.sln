@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Utillities", "Aptacode.CSharp.Common.Utillities\Aptacode.CSharp.Common.Utillities.csproj", "{53DBC073-23C5-496C-8E9B-DA7495230457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Utilities", "Aptacode.CSharp.Common.Utillities\Aptacode.CSharp.Common.Utilities.csproj", "{53DBC073-23C5-496C-8E9B-DA7495230457}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Persistence", "Aptacode.CSharp.Common.Persistence\Aptacode.CSharp.Common.Persistence.csproj", "{9A2AF015-DF2F-439B-86F2-3641DC95A9E3}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Http
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{86C3A490-7312-4265-AFE9-7352DD784CE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Utillities.Tests", "Tests\Aptacode.CSharp.Common.Utillities.Tests\Aptacode.CSharp.Common.Utillities.Tests.csproj", "{E2EDED9D-F252-4944-B2DA-D37880172652}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Utilities.Tests", "Tests\Aptacode.CSharp.Common.Utillities.Tests\Aptacode.CSharp.Common.Utilities.Tests.csproj", "{E2EDED9D-F252-4944-B2DA-D37880172652}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Http.Tests", "Tests\Aptacode.CSharp.Common.Http.Tests\Aptacode.CSharp.Common.Http.Tests.csproj", "{3CF7E115-1204-4CC0-93EF-030F88991908}"
 EndProject

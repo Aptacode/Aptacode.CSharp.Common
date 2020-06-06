@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Aptacode.CSharp.Common.Utillities.Extensions;
+using Aptacode.CSharp.Common.Utilities.Extensions;
 using Xunit;
 
-namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
+namespace Aptacode.CSharp.Common.Utilities.Tests.Extensions
 {
     public class EnumerableExtensionsTest
     {
@@ -24,8 +24,8 @@ namespace Aptacode.CSharp.Common.Utillities.Tests.Extensions
                 Assert.Contains(i, result2);
             }
 
-            Assert.Equal(sut.Count, result1.Count());
-            Assert.Equal(sut.Count, result2.Count());
+            Assert.Equal(sut.Count, result1.Count);
+            Assert.Equal(sut.Count, result2.Count);
 
             Assert.NotEqual(result1, result2);
             Assert.NotEqual(result2, result1);
