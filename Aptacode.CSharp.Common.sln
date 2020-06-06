@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Http
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{86C3A490-7312-4265-AFE9-7352DD784CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aptacode.CSharp.Common.Utillities.Tests", "Tests\Aptacode.CSharp.Common.Utillities.Tests\Aptacode.CSharp.Common.Utillities.Tests.csproj", "{E2EDED9D-F252-4944-B2DA-D37880172652}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Utillities.Tests", "Tests\Aptacode.CSharp.Common.Utillities.Tests\Aptacode.CSharp.Common.Utillities.Tests.csproj", "{E2EDED9D-F252-4944-B2DA-D37880172652}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aptacode.CSharp.Common.Http.Tests", "Tests\Aptacode.CSharp.Common.Http.Tests\Aptacode.CSharp.Common.Http.Tests.csproj", "{3CF7E115-1204-4CC0-93EF-030F88991908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Http.Tests", "Tests\Aptacode.CSharp.Common.Http.Tests\Aptacode.CSharp.Common.Http.Tests.csproj", "{3CF7E115-1204-4CC0-93EF-030F88991908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aptacode.CSharp.Common.Persistence.Tests", "Tests\Aptacode.CSharp.Common.Persistence.Tests\Aptacode.CSharp.Common.Persistence.Tests.csproj", "{D9550CEF-89B7-463D-B221-938B6E404A39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aptacode.CSharp.Common.Persistence.Tests", "Tests\Aptacode.CSharp.Common.Persistence.Tests\Aptacode.CSharp.Common.Persistence.Tests.csproj", "{D9550CEF-89B7-463D-B221-938B6E404A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
