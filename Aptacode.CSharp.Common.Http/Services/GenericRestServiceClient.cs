@@ -95,14 +95,13 @@ namespace Aptacode.CSharp.Common.Http.Services
 
         protected HttpRequestMessage GetRequestTemplate(HttpMethod method, string endpoint)
         {
-            var accessToken = AuthService.GetAccessToken();
-            if (string.IsNullOrEmpty(accessToken))
+            if (!AuthService.HasValidAccessToken)
             {
                 throw new Exception("You are not authorized to view this content");
             }
 
             var req = new HttpRequestMessage {Method = method, RequestUri = new Uri(endpoint)};
-            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.AccessToken);
             return req;
         }
     }

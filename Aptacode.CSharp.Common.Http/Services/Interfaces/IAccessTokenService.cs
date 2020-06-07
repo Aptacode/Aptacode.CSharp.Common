@@ -4,7 +4,9 @@ namespace Aptacode.CSharp.Common.Http.Services.Interfaces
 {
     public interface IAccessTokenService
     {
-        string GetAccessToken();
+        string AccessToken { get; }
+        bool HasValidAccessToken { get; }
+
         event EventHandler<string> OnTokenChanged;
     }
 }
