@@ -44,12 +44,12 @@ namespace Aptacode.CSharp.Common.Http.Services
         {
             var result = await base.GetAll<TGetViewModel>().ConfigureAwait(false);
 
-            if (result == null)
+            if (!result.HasValue)
             {
                 return null;
             }
 
-            var entities = result.Select(r => _mapper.Map<TEntity>(r)).ToList();
+            var entities = result.Content.Select(r => _mapper.Map<TEntity>(r)).ToList();
 
             entities.ToList().ForEach(MemoryCache.Update);
 
@@ -69,7 +69,8 @@ namespace Aptacode.CSharp.Common.Http.Services
         public async Task Delete(int id)
         {
             var result = await base.Delete(id).ConfigureAwait(false);
-            if (result)
+
+            if (result.HasValue && result.Content)
             {
                 MemoryCache.Remove(id);
             }
@@ -78,8 +79,12 @@ namespace Aptacode.CSharp.Common.Http.Services
         public IQueryable<TEntity> AsQueryable()
         {
             var result = base.GetAll<TGetViewModel>().Result;
+            if (result.HasValue)
+            {
+                return result.Content.Select(r => _mapper.Map<TEntity>(r)).AsQueryable();
+            }
 
-            return result?.Select(r => _mapper.Map<TEntity>(r)).AsQueryable();
+            return null;
         }
     }
 }
