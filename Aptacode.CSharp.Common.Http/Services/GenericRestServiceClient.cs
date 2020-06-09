@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Aptacode.CSharp.Common.Http.Services.Interfaces;
-using Newtonsoft.Json;
+using Aptacode.CSharp.Common.Http.Services.Responses;
 
 namespace Aptacode.CSharp.Common.Http.Services
 {
@@ -22,67 +18,44 @@ namespace Aptacode.CSharp.Common.Http.Services
             AuthService = authService;
         }
 
-        protected async Task<ServiceResponse<IEnumerable<TViewModel>>> GetAll<TViewModel>(params object[] routeSegments)
+        protected async Task<HttpServiceResponse<TReturn>> GenericHttpMethod<TReturn, TSend>(HttpMethod method,
+            TSend content, params object[] routeSegments)
         {
-            var response =
-                await HttpClient
-                    .SendAsync(GetRequestTemplate(HttpMethod.Get, ApiRouteBuilder.BuildRoute(routeSegments)))
-                    .ConfigureAwait(false);
-
-            return await ServiceResponse<IEnumerable<TViewModel>>.Create(response).ConfigureAwait(false);
-        }
-
-        protected async Task<ServiceResponse<TViewModel>> Get<TViewModel>(params object[] routeSegments)
-        {
-            var response =
-                await HttpClient
-                    .SendAsync(GetRequestTemplate(HttpMethod.Get, ApiRouteBuilder.BuildRoute(routeSegments)))
-                    .ConfigureAwait(false);
-
-            return await ServiceResponse<TViewModel>.Create(response).ConfigureAwait(false);
-        }
-
-        protected async Task<ServiceResponse<TGetViewModel>> Put<TGetViewModel, TPutViewModel>(TPutViewModel entity,
-            params object[] routeSegments)
-        {
-            var req = GetRequestTemplate(HttpMethod.Put, ApiRouteBuilder.BuildRoute(routeSegments));
-            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8,
-                MimeTypes.MimeTypes.Application.Json.ToString());
-            var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
-
-            return await ServiceResponse<TGetViewModel>.Create(response).ConfigureAwait(false);
-        }
-
-        protected async Task<ServiceResponse<TGetViewModel>> Post<TGetViewModel, TPutViewModel>(TPutViewModel entity,
-            params object[] routeSegments)
-        {
-            var req = GetRequestTemplate(HttpMethod.Post, ApiRouteBuilder.BuildRoute(routeSegments));
-            req.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8,
-                MimeTypes.MimeTypes.Application.Json.ToString());
-
-            var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
-
-            return await ServiceResponse<TGetViewModel>.Create(response).ConfigureAwait(false);
-        }
-
-        protected async Task<ServiceResponse<bool>> Delete(params object[] routeSegments)
-        {
-            var req = GetRequestTemplate(HttpMethod.Delete, ApiRouteBuilder.BuildRoute(routeSegments));
-            var response = await HttpClient.SendAsync(req).ConfigureAwait(false);
-
-            return await ServiceResponse<bool>.Create(response).ConfigureAwait(false);
-        }
-
-        protected HttpRequestMessage GetRequestTemplate(HttpMethod method, string endpoint)
-        {
-            if (!AuthService.HasValidAccessToken)
+            var requestMessage = CreateRequestMessage(method, content, routeSegments);
+            if (requestMessage == null)
             {
-                return null;
+                return HttpServiceResponse<TReturn>.Create("Could not create request");
             }
 
-            var req = new HttpRequestMessage {Method = method, RequestUri = new Uri(endpoint)};
-            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.AccessToken);
-            return req;
+            var response = await HttpClient.SendAsync(requestMessage).ConfigureAwait(false);
+            return await HttpServiceResponse<TReturn>.Create(response).ConfigureAwait(false);
         }
+
+        protected async Task<HttpServiceResponse<TReturn>> GenericHttpMethod<TReturn>(HttpMethod method,
+            params object[] routeSegments)
+        {
+            var requestMessage = CreateRequestMessage(method, routeSegments);
+            if (requestMessage == null)
+            {
+                return HttpServiceResponse<TReturn>.Create("Could not create request");
+            }
+
+            var response = await HttpClient.SendAsync(requestMessage).ConfigureAwait(false);
+            return await HttpServiceResponse<TReturn>.Create(response).ConfigureAwait(false);
+        }
+
+        protected HttpRequestMessage CreateRequestMessage(HttpMethod method, params object[] routeSegments) =>
+            new HttpRequestMessage()
+                .SetMethod(method)
+                .SetRoute(ApiRouteBuilder.BuildRoute(routeSegments))
+                .AddAuthentication(AuthService);
+
+        protected HttpRequestMessage CreateRequestMessage<TContent>(HttpMethod method, TContent content,
+            params object[] routeSegments) =>
+            new HttpRequestMessage()
+                .SetMethod(method)
+                .SetRoute(ApiRouteBuilder.BuildRoute(routeSegments))
+                .AddAuthentication(AuthService)
+                .AddContent(content);
     }
 }
