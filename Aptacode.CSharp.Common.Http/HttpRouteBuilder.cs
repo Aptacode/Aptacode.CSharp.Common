@@ -18,6 +18,7 @@ namespace Aptacode.CSharp.Common.Http
 
             return input;
         }
+
         public static string RemoveNonLettersAndDigitsFromEnd(this string input)
         {
             var lastChar = input[input.Length - 1];
@@ -33,17 +34,19 @@ namespace Aptacode.CSharp.Common.Http
         public static string JoinRoute(this string baseSegment, params object[] routeSegments)
         {
             var builder = new StringBuilder();
-            
+
             builder.Append(baseSegment);
 
             if (!baseSegment.EndsWith("/"))
+            {
                 builder.Append(RouteSeparator);
+            }
 
             foreach (var segment in routeSegments
                 .Select(s => s
-                .ToString()
-                .RemoveNonLettersAndDigitsFromEnd()
-                .RemoveNonLettersAndDigitsFromStart()))
+                    .ToString()
+                    .RemoveNonLettersAndDigitsFromEnd()
+                    .RemoveNonLettersAndDigitsFromStart()))
             {
                 builder.Append(segment);
                 builder.Append(RouteSeparator);

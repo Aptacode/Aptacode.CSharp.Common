@@ -25,7 +25,8 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http
 
         [Theory]
         [ClassData(typeof(HttpRouteBuilderAppendTestData))]
-        public void AppendTests(ServerAddress serverAddress, object[] baseComponents,  List<object[]> components, string expectedAddress)
+        public void AppendTests(ServerAddress serverAddress, object[] baseComponents, List<object[]> components,
+            string expectedAddress)
         {
             var sut = new HttpRouteBuilder(serverAddress, baseComponents);
 

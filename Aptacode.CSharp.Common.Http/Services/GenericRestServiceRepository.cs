@@ -37,7 +37,6 @@ namespace Aptacode.CSharp.Common.Http.Services
             var returnedEntity = _mapper.Map<TEntity>(result.Value);
             MemoryCache.Update(returnedEntity);
             return returnedEntity.Id;
-
         }
 
         public async Task Update(TEntity entity)

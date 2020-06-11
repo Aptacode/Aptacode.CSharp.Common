@@ -8,12 +8,8 @@ namespace Aptacode.CSharp.Common.Utilities.Mvvm
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
 
-        public event EventHandler CanExecuteChanged;
-
         public DelegateCommand(Action<object> execute)
-            : this(execute, null)
-        {
-        }
+            : this(execute, null) { }
 
         public DelegateCommand(Action<object> execute,
             Predicate<object> canExecute)
@@ -22,14 +18,16 @@ namespace Aptacode.CSharp.Common.Utilities.Mvvm
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute(parameter);
-        }
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            if (CanExecute(parameter))
+            {
+                _execute(parameter);
+            }
         }
 
         public void RaiseCanExecuteChanged()
@@ -43,28 +41,33 @@ namespace Aptacode.CSharp.Common.Utilities.Mvvm
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
 
-        public event EventHandler CanExecuteChanged;
-
         public DelegateCommand(Action<T> execute)
-            : this(execute, null)
-        {
-        }
+            : this(execute, null) { }
 
-        public DelegateCommand(Action<T> execute,
-            Predicate<T> canExecute)
+        public DelegateCommand(Action<T> execute, Predicate<T> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
+        public event EventHandler CanExecuteChanged;
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)Convert.ChangeType(parameter, typeof(T)));
+            if (parameter is T param)
+            {
+                return _canExecute == null || _canExecute(param);
+            }
+
+            return _canExecute == null;
         }
 
         public void Execute(object parameter)
         {
-            _execute((T)Convert.ChangeType(parameter, typeof(T)));
+            if (CanExecute(parameter) && parameter is T param)
+            {
+                _execute(param);
+            }
         }
 
         public void RaiseCanExecuteChanged()
