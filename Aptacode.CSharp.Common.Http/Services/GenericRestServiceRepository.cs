@@ -29,14 +29,15 @@ namespace Aptacode.CSharp.Common.Http.Services
             var result = await GenericHttpMethod<TGetViewModel, TPutViewModel>(HttpMethod.Put, viewmodel)
                 .ConfigureAwait(false);
 
-            if (result.HasValue)
+            if (!result.HasValue)
             {
-                var returnedEntity = _mapper.Map<TEntity>(result.Value);
-                MemoryCache.Update(returnedEntity);
-                return returnedEntity.Id;
+                return -1;
             }
 
-            return -1;
+            var returnedEntity = _mapper.Map<TEntity>(result.Value);
+            MemoryCache.Update(returnedEntity);
+            return returnedEntity.Id;
+
         }
 
         public async Task Update(TEntity entity)
