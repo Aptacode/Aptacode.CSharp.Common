@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Aptacode.CSharp.Common.Http.Models;
 
 namespace Aptacode.CSharp.Common.Http.Tests.Http.TestData
 {

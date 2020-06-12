@@ -5,7 +5,6 @@ namespace Aptacode.CSharp.Common.Utilities.Tests.Mvvm
 {
     public class BindableBaseTests
     {
-
         private class FakeBindableBase : BindableBase
         {
             private int _testProperty;
@@ -15,7 +14,6 @@ namespace Aptacode.CSharp.Common.Utilities.Tests.Mvvm
                 get => _testProperty;
                 set => SetProperty(ref _testProperty, value);
             }
-
         }
 
         [Fact]

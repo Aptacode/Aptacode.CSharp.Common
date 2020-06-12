@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace Aptacode.CSharp.Common.Http
+namespace Aptacode.CSharp.Common.Http.Services.Extensions
 {
-    public static class StringExtensions
+    public static class HttpRouteStringExtensions
     {
         private const string RouteSeparator = "/";
 
@@ -54,36 +54,5 @@ namespace Aptacode.CSharp.Common.Http
 
             return builder.ToString();
         }
-    }
-
-    public class HttpRouteBuilder
-    {
-        #region Constructor
-
-        public HttpRouteBuilder(ServerAddress serverAddress, params object[] baseRouteSegments)
-        {
-            ServerAddress = serverAddress;
-            ApiBaseRoute = serverAddress.ToString();
-            Append(baseRouteSegments);
-        }
-
-        #endregion
-
-        public HttpRouteBuilder Append(params object[] baseRouteSegments)
-        {
-            ApiBaseRoute = ApiBaseRoute.JoinRoute(baseRouteSegments);
-            return this;
-        }
-
-        public string BuildRoute(params object[] routeSegments) => ApiBaseRoute.JoinRoute(routeSegments);
-
-        public override string ToString() => ApiBaseRoute;
-
-        #region Properties
-
-        public string ApiBaseRoute { get; protected set; }
-        public ServerAddress ServerAddress { get; }
-
-        #endregion
     }
 }

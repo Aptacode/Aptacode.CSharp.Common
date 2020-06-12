@@ -4,6 +4,10 @@ using Newtonsoft.Json;
 
 namespace Aptacode.CSharp.Common.Http.Services.Responses
 {
+    /// <summary>
+    ///     Represents a response from a REST Service
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class HttpServiceResponse<T> : ServiceResponse<T>
     {
         protected HttpServiceResponse(HttpResponseMessage responseMessage, string message) : base(message)

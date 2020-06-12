@@ -2,12 +2,15 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Aptacode.CSharp.Common.Http.Services.Interfaces;
+using Aptacode.CSharp.Common.Http.Interfaces;
 using Newtonsoft.Json;
 
-namespace Aptacode.CSharp.Common.Http.Services
+namespace Aptacode.CSharp.Common.Http.Services.Extensions
 {
-    public static class HttpRequestBuilder
+    /// <summary>
+    ///     A collection of static builder extension methods for HttpRequestMessage
+    /// </summary>
+    public static class HttpRequestBuilderExtensions
     {
         public static HttpRequestMessage SetMethod(this HttpRequestMessage requestMessage, HttpMethod method)
         {

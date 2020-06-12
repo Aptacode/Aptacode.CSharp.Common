@@ -1,5 +1,9 @@
 ﻿namespace Aptacode.CSharp.Common.Http.Services.Responses
 {
+    /// <summary>
+    ///     Represents a generic response from a service
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ServiceResponse<T>
     {
         protected ServiceResponse()

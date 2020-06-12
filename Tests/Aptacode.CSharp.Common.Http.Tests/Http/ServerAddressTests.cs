@@ -1,3 +1,4 @@
+using Aptacode.CSharp.Common.Http.Models;
 using Aptacode.CSharp.Common.Http.Tests.Http.TestData;
 using Xunit;
 

@@ -1,4 +1,4 @@
-﻿namespace Aptacode.CSharp.Common.Http
+﻿namespace Aptacode.CSharp.Common.Http.Models
 {
     public enum Protocol
     {

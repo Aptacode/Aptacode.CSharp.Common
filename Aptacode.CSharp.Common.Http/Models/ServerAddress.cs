@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Text;
 
-namespace Aptacode.CSharp.Common.Http
+namespace Aptacode.CSharp.Common.Http.Models
 {
+    /// <summary>
+    ///     Represents a server address
+    /// </summary>
     public class ServerAddress
     {
         public override string ToString()
