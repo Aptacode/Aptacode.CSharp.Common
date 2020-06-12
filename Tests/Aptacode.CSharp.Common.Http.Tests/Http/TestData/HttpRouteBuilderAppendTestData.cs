@@ -13,11 +13,11 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http.TestData
             new object[]
             {
                 ServerAddress, new[] {"api", "users"},
-                new List<object[]>
+                new List<string[]>
                 {
-                    new object[] {"1", "2"},
-                    new object[] {"3"},
-                    new object[] {"4", "5", "6"}
+                    new[] {"1", "2"},
+                    new[] {"3"},
+                    new[] {"4", "5", "6"}
                 },
                 "http://aptacode.com:8080/api/users/1/2/3/4/5/6/"
             }

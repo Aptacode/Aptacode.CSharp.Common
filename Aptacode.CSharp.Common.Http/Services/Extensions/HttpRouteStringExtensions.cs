@@ -57,7 +57,5 @@ namespace Aptacode.CSharp.Common.Http.Services.Extensions
 
             return builder.ToString();
         }
-
-
     }
 }

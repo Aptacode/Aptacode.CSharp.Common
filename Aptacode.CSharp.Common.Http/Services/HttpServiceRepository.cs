@@ -34,7 +34,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         {
             var viewmodel = Mapper.Map<TPutViewModel>(entity);
             var result = await ServiceClient
-                .Send<TGetViewModel, TPutViewModel>(HttpMethod.Put, RouteProvider.Build(), viewmodel)
+                .Send<TGetViewModel, TPutViewModel>(HttpMethod.Put, RouteProvider.Get(), viewmodel)
                 .ConfigureAwait(false);
 
             if (!result.HasValue)
@@ -52,13 +52,14 @@ namespace Aptacode.CSharp.Common.Http.Services
             var viewmodel = Mapper.Map<TPutViewModel>(entity);
 
             await ServiceClient
-                .Send<TGetViewModel, TPutViewModel>(HttpMethod.Post, RouteProvider.Build(entity.Id), viewmodel)
+                .Send<TGetViewModel, TPutViewModel>(HttpMethod.Post, RouteProvider.Get(entity.Id.ToString()),
+                    viewmodel)
                 .ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            var result = await ServiceClient.Send<IEnumerable<TGetViewModel>>(HttpMethod.Get, RouteProvider.Build())
+            var result = await ServiceClient.Send<IEnumerable<TGetViewModel>>(HttpMethod.Get, RouteProvider.Get())
                 .ConfigureAwait(false);
 
             return !result.HasValue ? null : result.Value.Select(r => Mapper.Map<TEntity>(r)).ToList();
@@ -66,14 +67,14 @@ namespace Aptacode.CSharp.Common.Http.Services
 
         public async Task<TEntity> Get(int id)
         {
-            var result = await ServiceClient.Send<TGetViewModel>(HttpMethod.Get, RouteProvider.Build(id))
+            var result = await ServiceClient.Send<TGetViewModel>(HttpMethod.Get, RouteProvider.Get(id.ToString()))
                 .ConfigureAwait(false);
             return Mapper.Map<TEntity>(result);
         }
 
         public async Task Delete(int id)
         {
-            await ServiceClient.Send<bool>(HttpMethod.Delete, RouteProvider.Build(id)).ConfigureAwait(false);
+            await ServiceClient.Send<bool>(HttpMethod.Delete, RouteProvider.Get(id.ToString())).ConfigureAwait(false);
         }
 
         public IQueryable<TEntity> AsQueryable()

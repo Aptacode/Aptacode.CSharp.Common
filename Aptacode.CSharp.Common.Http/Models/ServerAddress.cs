@@ -6,36 +6,8 @@ namespace Aptacode.CSharp.Common.Http.Models
     /// <summary>
     ///     Represents a server address
     /// </summary>
-    public class ServerAddress
+    public struct ServerAddress
     {
-        public override string ToString()
-        {
-            if (string.IsNullOrEmpty(Address))
-            {
-                return string.Empty;
-            }
-
-            var stringBuilder = new StringBuilder();
-
-            if (Protocol != null)
-            {
-                stringBuilder.Append(Protocol.ToString());
-                stringBuilder.Append("://");
-            }
-
-            stringBuilder.Append(Address);
-
-            if (Port != null)
-            {
-                stringBuilder.Append(":");
-                stringBuilder.Append(Port.ToString());
-            }
-
-            stringBuilder.Append("/");
-
-            return stringBuilder.ToString();
-        }
-
         #region Constructors
 
         public ServerAddress(string address, int? port) : this(null, address, port) { }
@@ -45,55 +17,79 @@ namespace Aptacode.CSharp.Common.Http.Models
         public ServerAddress(Protocol? protocol, string address, int? port)
         {
             Protocol = protocol;
-            Address = address;
-            Port = port;
+            Address = CleanAddress(address);
+            Port = CleanPort(port);
+            _toString = ToString(Protocol, Address, Port);
+        }
+
+        public static string CleanAddress(string input)
+        {
+            if (input.EndsWith("/"))
+            {
+                input = input.Remove(input.Length - 1, 1);
+            }
+
+            if (input.Contains("://"))
+            {
+                var addressComponents = input.Split(new[] {"://"}, StringSplitOptions.None);
+                input = addressComponents.Length >= 1 ? addressComponents[1] : string.Empty;
+            }
+
+            return input;
+        }
+
+        public static int? CleanPort(int? input)
+        {
+            if (input == null || input < 0 || input > 65535)
+            {
+                return null;
+            }
+
+            return input;
+        }
+
+        private static string ToString(Protocol? protocol, string address, int? port)
+        {
+            if (string.IsNullOrEmpty(address))
+            {
+                return string.Empty;
+            }
+
+            var stringBuilder = new StringBuilder();
+
+            if (protocol != null)
+            {
+                stringBuilder.Append(protocol.ToString());
+                stringBuilder.Append("://");
+            }
+
+            stringBuilder.Append(address);
+
+            if (port != null)
+            {
+                stringBuilder.Append(":");
+                stringBuilder.Append(port.ToString());
+            }
+
+            stringBuilder.Append("/");
+
+            return stringBuilder.ToString();
         }
 
         #endregion
 
         #region Properties
 
-        public Protocol? Protocol { get; set; }
-        private string _address;
+        public Protocol? Protocol { get; }
+        public string Address { get; }
+        public int? Port { get; }
 
-        public string Address
-        {
-            get => _address;
-            set
-            {
-                if (value.EndsWith("/"))
-                {
-                    value = value.Remove(value.Length - 1, 1);
-                }
-
-                if (value.Contains("://"))
-                {
-                    var addressComponents = value.Split(new[] {"://"}, StringSplitOptions.None);
-                    value = addressComponents.Length >= 1 ? addressComponents[1] : string.Empty;
-                }
-
-                _address = value;
-            }
-        }
-
-        private int? _port;
-
-        public int? Port
-        {
-            get => _port;
-            set
-            {
-                if (value < 0 || value > 65535)
-                {
-                    _port = null;
-                }
-                else
-                {
-                    _port = value;
-                }
-            }
-        }
+        private readonly string _toString;
 
         #endregion
+
+        public override string ToString() => _toString;
+
+        public ServerAddress Copy() => new ServerAddress(Protocol, Address, Port);
     }
 }

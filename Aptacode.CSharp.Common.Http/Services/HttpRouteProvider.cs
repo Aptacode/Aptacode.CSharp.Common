@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Aptacode.CSharp.Common.Http.Interfaces;
+﻿using Aptacode.CSharp.Common.Http.Interfaces;
 using Aptacode.CSharp.Common.Http.Models;
 using Aptacode.CSharp.Common.Http.Services.Extensions;
 
@@ -12,55 +11,54 @@ namespace Aptacode.CSharp.Common.Http.Services
     {
         #region Constructor
 
-        public HttpRouteProvider(ServerAddress serverAddress, params object[] baseRouteSegments)
-        {
-            ServerAddress = serverAddress;
-            ApiBaseRoute = serverAddress.ToString();
-            Append(baseRouteSegments);
-        }
-
         public HttpRouteProvider(ServerAddress serverAddress, params string[] baseRouteSegments)
         {
             ServerAddress = serverAddress;
-            ApiBaseRoute = serverAddress.ToString();
-            Append(baseRouteSegments);
+            Join(baseRouteSegments);
         }
 
         public HttpRouteProvider(ServerAddress serverAddress)
         {
             ServerAddress = serverAddress;
-            ApiBaseRoute = serverAddress.ToString();
         }
-
 
         #endregion
 
-        public string Build(params object[] routeSegments) => this.Build(ToStrings(routeSegments));
-        public string Build() => ApiBaseRoute;
-        public string Build(params string[] routeSegments) => ApiBaseRoute.JoinRoute(routeSegments);
-
-        private static string[] ToStrings(object[] routeSegments)
-        {
-            if (routeSegments == null || routeSegments.Length == 0)
-                return new string[0];
-
-            return routeSegments.Select(s => s.ToString()).ToArray();
-        }
-
-        public HttpRouteProvider Append(params object[] baseRouteSegments) => Append(ToStrings(baseRouteSegments));
-
-        public HttpRouteProvider Append(params string[] baseRouteSegments)
-        {
-            ApiBaseRoute = ApiBaseRoute.JoinRoute(baseRouteSegments);
-            return this;
-        }
-
-        public override string ToString() => ApiBaseRoute;
-
         #region Properties
 
-        public string ApiBaseRoute { get; protected set; }
+        public string ApiRoute { get; protected set; } = "";
         public ServerAddress ServerAddress { get; }
+
+        #endregion
+
+        #region Output
+        public string Get(params string[] segments)
+        {
+            return ToString().JoinRoute(segments);
+        }
+        public string Get() => ToString();
+        public override string ToString() => ServerAddress.ToString().JoinRoute(ApiRoute);
+
+        #endregion
+
+        #region Modify
+
+        public IRouteProvider Append(params string[] segments)
+        {
+            var newRoute = new HttpRouteProvider(ServerAddress.Copy(), ApiRoute);
+
+            newRoute.Join(segments);
+
+            return newRoute;
+        }
+
+        public void Join(params string[] segments)
+        {
+            if (segments != null)
+            {
+                ApiRoute = ApiRoute.JoinRoute(segments);
+            }
+        }
 
         #endregion
     }
