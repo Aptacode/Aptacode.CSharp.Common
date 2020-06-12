@@ -13,5 +13,21 @@ namespace Aptacode.CSharp.Common.Http.Tests.Models
             var sut = new ServerAddress(protocol, address, port);
             Assert.Equal(expectedAddress, sut.ToString());
         }
+
+        [Theory]
+        [ClassData(typeof(ServerAddressToStringTestData))]
+        public void CopyTests(Protocol? protocol, string address, int? port, string expectedAddress)
+        {
+            //Arrange
+            var sut = new ServerAddress(protocol, address, port);
+
+            //Act
+            var copy = sut.Copy();
+
+            //Assert
+            Assert.Equal(expectedAddress, sut.ToString());
+            Assert.Equal(copy.ToString(), sut.ToString());
+
+        }
     }
 }
