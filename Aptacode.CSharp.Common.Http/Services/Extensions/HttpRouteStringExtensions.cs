@@ -31,7 +31,7 @@ namespace Aptacode.CSharp.Common.Http.Services.Extensions
             return input;
         }
 
-        public static string JoinRoute(this string baseSegment, params object[] routeSegments)
+        public static string JoinRoute(this string baseSegment, params string[] routeSegments)
         {
             var builder = new StringBuilder();
 
@@ -42,17 +42,22 @@ namespace Aptacode.CSharp.Common.Http.Services.Extensions
                 builder.Append(RouteSeparator);
             }
 
-            foreach (var segment in routeSegments
-                .Select(s => s
-                    .ToString()
-                    .RemoveNonLettersAndDigitsFromEnd()
-                    .RemoveNonLettersAndDigitsFromStart()))
+            if (routeSegments != null)
             {
-                builder.Append(segment);
-                builder.Append(RouteSeparator);
+                foreach (var segment in routeSegments
+                    .Select(s => s
+                        .ToString()
+                        .RemoveNonLettersAndDigitsFromEnd()
+                        .RemoveNonLettersAndDigitsFromStart()))
+                {
+                    builder.Append(segment);
+                    builder.Append(RouteSeparator);
+                }
             }
 
             return builder.ToString();
         }
+
+
     }
 }
