@@ -11,10 +11,10 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>1.0.0.17</Version>
-    <AssemblyVersion>1.0.0.17</AssemblyVersion>
+    <AssemblyVersion>1.0.0.18</AssemblyVersion>
     <LangVersion>8.0</LangVersion>
     <PackageIconUrl />
-    <FileVersion>1.0.0.17</FileVersion>
+    <FileVersion>1.0.0.18</FileVersion>
     <PackageIcon>logo.png</PackageIcon>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>

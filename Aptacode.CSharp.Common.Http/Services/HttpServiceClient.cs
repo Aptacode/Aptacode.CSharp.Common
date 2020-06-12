@@ -13,7 +13,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         protected static HttpClient HttpClient = new HttpClient();
         protected readonly IHttpRequestGenerator RequestGenerator;
 
-        protected HttpServiceClient(IHttpRequestGenerator requestBuilder)
+        public HttpServiceClient(IHttpRequestGenerator requestBuilder)
         {
             RequestGenerator = requestBuilder;
         }
