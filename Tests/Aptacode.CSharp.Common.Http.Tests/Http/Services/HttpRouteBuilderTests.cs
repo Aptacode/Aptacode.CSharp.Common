@@ -4,7 +4,7 @@ using Aptacode.CSharp.Common.Http.Services;
 using Aptacode.CSharp.Common.Http.Tests.Http.TestData;
 using Xunit;
 
-namespace Aptacode.CSharp.Common.Http.Tests.Http
+namespace Aptacode.CSharp.Common.Http.Tests.Http.Services
 {
     public class HttpRouteBuilderTests
     {

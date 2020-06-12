@@ -1,15 +1,16 @@
 ﻿namespace Aptacode.CSharp.Common.Http.Interfaces
 {
     /// <summary>
-    /// Creates Routes to Http resources
+    ///     Creates Routes to Http resources
     /// </summary>
     public interface IRouteProvider
     {
         /// <summary>
-        /// Builds and returns the string Http Route
+        ///     Builds and returns the string Http Route
         /// </summary>
         /// <returns></returns>
         string Get();
+
         string Get(params string[] additionalSegments);
 
 

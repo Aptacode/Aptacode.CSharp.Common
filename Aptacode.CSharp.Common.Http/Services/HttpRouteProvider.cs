@@ -32,10 +32,9 @@ namespace Aptacode.CSharp.Common.Http.Services
         #endregion
 
         #region Output
-        public string Get(params string[] segments)
-        {
-            return ToString().JoinRoute(segments);
-        }
+
+        public string Get(params string[] segments) => ToString().JoinRoute(segments);
+
         public string Get() => ToString();
         public override string ToString() => ServerAddress.ToString().JoinRoute(ApiRoute);
 
