@@ -1,5 +1,5 @@
-﻿using Aptacode.CSharp.Common.Http.Interfaces;
-using Aptacode.CSharp.Common.Http.Models;
+﻿using System;
+using Aptacode.CSharp.Common.Http.Interfaces;
 using Aptacode.CSharp.Common.Http.Services.Extensions;
 
 namespace Aptacode.CSharp.Common.Http.Services
@@ -11,13 +11,13 @@ namespace Aptacode.CSharp.Common.Http.Services
     {
         #region Constructor
 
-        public HttpRouteProvider(ServerAddress serverAddress, params string[] baseRouteSegments)
+        public HttpRouteProvider(Uri serverAddress, params string[] baseRouteSegments)
         {
             ServerAddress = serverAddress;
             Join(baseRouteSegments);
         }
 
-        public HttpRouteProvider(ServerAddress serverAddress)
+        public HttpRouteProvider(Uri serverAddress)
         {
             ServerAddress = serverAddress;
         }
@@ -27,7 +27,7 @@ namespace Aptacode.CSharp.Common.Http.Services
         #region Properties
 
         public string ApiRoute { get; protected set; } = "";
-        public ServerAddress ServerAddress { get; }
+        public Uri ServerAddress { get; }
 
         #endregion
 

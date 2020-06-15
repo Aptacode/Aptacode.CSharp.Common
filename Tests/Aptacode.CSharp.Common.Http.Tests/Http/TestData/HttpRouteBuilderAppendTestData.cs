@@ -1,12 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Aptacode.CSharp.Common.Http.Models;
 
 namespace Aptacode.CSharp.Common.Http.Tests.Http.TestData
 {
     public class HttpRouteBuilderAppendTestData : IEnumerable<object[]>
     {
-        private static readonly ServerAddress ServerAddress = new ServerAddress(Protocol.http, "aptacode.com", 8080);
+        private static readonly Uri ServerAddress = new UriBuilder("http", "aptacode.com", 8080).Uri;
 
         private readonly List<object[]> _data = new List<object[]>
         {

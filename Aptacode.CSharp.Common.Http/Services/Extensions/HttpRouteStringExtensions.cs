@@ -42,17 +42,18 @@ namespace Aptacode.CSharp.Common.Http.Services.Extensions
                 builder.Append(RouteSeparator);
             }
 
-            if (routeSegments != null)
+            if (routeSegments == null)
             {
-                foreach (var segment in routeSegments
-                    .Select(s => s
-                        .ToString()
-                        .RemoveNonLettersAndDigitsFromEnd()
-                        .RemoveNonLettersAndDigitsFromStart()))
-                {
-                    builder.Append(segment);
-                    builder.Append(RouteSeparator);
-                }
+                return builder.ToString();
+            }
+
+            foreach (var segment in routeSegments
+                .Select(s => s
+                    .RemoveNonLettersAndDigitsFromEnd()
+                    .RemoveNonLettersAndDigitsFromStart()))
+            {
+                builder.Append(segment);
+                builder.Append(RouteSeparator);
             }
 
             return builder.ToString();

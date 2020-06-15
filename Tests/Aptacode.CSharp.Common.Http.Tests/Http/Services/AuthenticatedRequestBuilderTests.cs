@@ -26,7 +26,6 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http.Services
             Assert.Equal("https://localhost/test", requestMessage.RequestUri.ToString());
             Assert.Equal("Bearer", requestMessage.Headers.Authorization.Scheme);
             Assert.Equal(expectedToken, requestMessage.Headers.Authorization.Parameter);
-
         }
     }
 }
