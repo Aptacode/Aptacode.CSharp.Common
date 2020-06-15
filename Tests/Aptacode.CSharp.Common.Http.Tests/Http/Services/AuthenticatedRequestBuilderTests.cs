@@ -12,7 +12,7 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http.Services
         public void CreateRequest()
         {
             //Arrange
-            var expectedToken = "TestValue";
+            const string expectedToken = "TestValue";
             var mockAccessTokenService = new Mock<IAccessTokenService>();
             mockAccessTokenService.Setup(a => a.AccessToken).Returns(expectedToken);
 

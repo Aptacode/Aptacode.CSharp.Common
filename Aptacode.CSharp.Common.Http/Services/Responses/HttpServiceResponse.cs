@@ -37,7 +37,7 @@ namespace Aptacode.CSharp.Common.Http.Services.Responses
 
         public new static HttpServiceResponse<T> Create(string message) => new HttpServiceResponse<T>(message);
 
-        public static HttpServiceResponse<T> Create(T value, string message) =>
+        public static new HttpServiceResponse<T> Create(T value, string message) =>
             new HttpServiceResponse<T>(value, message);
 
         public static HttpServiceResponse<T> Create(T value, HttpResponseMessage message) =>
