@@ -10,14 +10,14 @@ namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
     {
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
-        public IRepository<TEntity> Repository<TEntity>() where TEntity : IEntity
+        public IRepository<TKey, TEntity> Repository<TKey, TEntity>() where TEntity : IEntity<TKey>
         {
             if (_repositories.Keys.Contains(typeof(TEntity)))
             {
-                return _repositories[typeof(TEntity)] as IRepository<TEntity>;
+                return _repositories[typeof(TEntity)] as IRepository<TKey, TEntity>;
             }
 
-            var repo = CreateRepository<TEntity>();
+            var repo = CreateRepository<TKey, TEntity>();
             if (repo != null)
             {
                 SetRepository(repo);
@@ -26,7 +26,7 @@ namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
             return repo;
         }
 
-        public void SetRepository<TEntity>(IRepository<TEntity> repository) where TEntity : IEntity
+        public void SetRepository<TKey, TEntity>(IRepository<TKey, TEntity> repository) where TEntity : IEntity<TKey>
         {
             _repositories.Add(typeof(TEntity), repository);
         }
@@ -35,6 +35,6 @@ namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
         public abstract Task Commit();
         public abstract void RejectChanges();
 
-        protected abstract IRepository<TEntity> CreateRepository<TEntity>() where TEntity : IEntity;
+        protected abstract IRepository<TKey, TEntity> CreateRepository<TKey, TEntity>() where TEntity : IEntity<TKey>;
     }
 }

@@ -21,7 +21,7 @@ namespace Aptacode.CSharp.Common.Http.Tests.Http.Services.Extensions
             mockTokenService.Setup(m => m.AccessToken).Returns(expectedToken);
 
             //Act
-            sut.AddAuthentication(mockTokenService.Object);
+            sut.AddJwtAuthentication(mockTokenService.Object);
 
             //Assert
             Assert.Equal("Bearer", sut.Headers.Authorization.Scheme);

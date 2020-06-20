@@ -1,6 +1,6 @@
 ﻿namespace Aptacode.CSharp.Common.Persistence.Cache
 {
-    public class EntityMemoryCache<TEntity> : GenericMemoryCache<int, TEntity> where TEntity : IEntity
+    public class EntityMemoryCache<TKey, TEntity> : GenericMemoryCache<TKey, TEntity> where TEntity : IEntity<TKey>
     {
         public void Update(TEntity entity)
         {

@@ -17,13 +17,13 @@ namespace Aptacode.CSharp.Common.Http.Services
             new HttpRequestMessage()
                 .SetMethod(method)
                 .SetRoute(route)
-                .AddAuthentication(AuthService);
+                .AddJwtAuthentication(AuthService);
 
         public HttpRequestMessage CreateRequest<TContent>(HttpMethod method, string route, TContent content) =>
             new HttpRequestMessage()
                 .SetMethod(method)
                 .SetRoute(route)
-                .AddAuthentication(AuthService)
+                .AddJwtAuthentication(AuthService)
                 .AddContent(content);
     }
 }

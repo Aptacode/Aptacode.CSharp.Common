@@ -4,7 +4,7 @@ namespace Aptacode.CSharp.Common.Persistence.UnitOfWork
 {
     public interface IGenericUnitOfWork : IUnitOfWork
     {
-        IRepository<TEntity> Repository<TEntity>() where TEntity : IEntity;
-        void SetRepository<TEntity>(IRepository<TEntity> repository) where TEntity : IEntity;
+        IRepository<TKey, TEntity> Repository<TKey, TEntity>() where TEntity : IEntity<TKey>;
+        void SetRepository<TKey, TEntity>(IRepository<TKey, TEntity> repository) where TEntity : IEntity<TKey>;
     }
 }

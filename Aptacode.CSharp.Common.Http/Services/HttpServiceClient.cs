@@ -10,12 +10,13 @@ namespace Aptacode.CSharp.Common.Http.Services
     /// </summary>
     public class HttpServiceClient : IHttpServiceClient
     {
-        protected static HttpClient HttpClient = new HttpClient();
+        protected readonly IHttpClient HttpClient;
         protected readonly IHttpRequestGenerator RequestGenerator;
 
-        public HttpServiceClient(IHttpRequestGenerator requestBuilder)
+        public HttpServiceClient(IHttpClient client, IHttpRequestGenerator requestGenerator)
         {
-            RequestGenerator = requestBuilder;
+            HttpClient = client;
+            RequestGenerator = requestGenerator;
         }
 
         public async Task<HttpServiceResponse<TReturn>> Send<TReturn, TSend>(HttpMethod method, string route,
@@ -27,8 +28,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 return HttpServiceResponse<TReturn>.Create("Could not create request");
             }
 
-            var response = await HttpClient.SendAsync(requestMessage).ConfigureAwait(false);
-            return await HttpServiceResponse<TReturn>.Create(response).ConfigureAwait(false);
+            return await HttpClient.Send<TReturn>(requestMessage).ConfigureAwait(false);
         }
 
         public async Task<HttpServiceResponse<TReturn>> Send<TReturn>(HttpMethod method,
@@ -40,8 +40,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 return HttpServiceResponse<TReturn>.Create("Could not create request");
             }
 
-            var response = await HttpClient.SendAsync(requestMessage).ConfigureAwait(false);
-            return await HttpServiceResponse<TReturn>.Create(response).ConfigureAwait(false);
+            return await HttpClient.Send<TReturn>(requestMessage).ConfigureAwait(false);
         }
     }
 }

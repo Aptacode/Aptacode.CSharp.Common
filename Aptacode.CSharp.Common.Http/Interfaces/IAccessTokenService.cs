@@ -7,7 +7,7 @@ namespace Aptacode.CSharp.Common.Http.Interfaces
     /// </summary>
     public interface IAccessTokenService
     {
-        string AccessToken { get; }
+        string AccessToken { get; set; }
         bool HasValidAccessToken { get; }
 
         event EventHandler<string> OnTokenChanged;

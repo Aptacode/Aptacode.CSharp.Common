@@ -9,15 +9,15 @@ using AutoMapper;
 
 namespace Aptacode.CSharp.Common.Http.Services
 {
-    public class HttpServiceRepository<TEntity> : HttpServiceRepository<TEntity, TEntity, TEntity>
-        where TEntity : IEntity
+    public class HttpServiceRepository<TKey, TEntity> : HttpServiceRepository<TKey, TEntity, TEntity, TEntity>
+        where TEntity : IEntity<TKey>
     {
         public HttpServiceRepository(IHttpServiceClient serviceClient, IRouteProvider routeProvider, IMapper mapper) :
             base(serviceClient, routeProvider, mapper) { }
     }
 
-    public class HttpServiceRepository<TGetViewModel, TPutViewModel, TEntity> : IRepository<TEntity>
-        where TEntity : IEntity
+    public class HttpServiceRepository<TKey, TGetViewModel, TPutViewModel, TEntity> : IRepository<TKey, TEntity>
+        where TEntity : IEntity<TKey>
     {
         protected readonly IMapper Mapper;
         protected readonly IRouteProvider RouteProvider;
@@ -30,21 +30,12 @@ namespace Aptacode.CSharp.Common.Http.Services
             Mapper = mapper;
         }
 
-        public async Task<int> Create(TEntity entity)
+        public async Task Create(TEntity entity)
         {
             var viewmodel = Mapper.Map<TPutViewModel>(entity);
             var result = await ServiceClient
                 .Send<TGetViewModel, TPutViewModel>(HttpMethod.Put, RouteProvider.Get(), viewmodel)
                 .ConfigureAwait(false);
-
-            if (!result.HasValue)
-            {
-                return -1;
-            }
-
-            var returnedEntity = Mapper.Map<TEntity>(result.Value);
-
-            return returnedEntity.Id;
         }
 
         public async Task Update(TEntity entity)
@@ -65,14 +56,14 @@ namespace Aptacode.CSharp.Common.Http.Services
             return !result.HasValue ? null : result.Value.Select(r => Mapper.Map<TEntity>(r)).ToList();
         }
 
-        public async Task<TEntity> Get(int id)
+        public async Task<TEntity> Get(TKey id)
         {
             var result = await ServiceClient.Send<TGetViewModel>(HttpMethod.Get, RouteProvider.Get(id.ToString()))
                 .ConfigureAwait(false);
             return Mapper.Map<TEntity>(result);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(TKey id)
         {
             await ServiceClient.Send<bool>(HttpMethod.Delete, RouteProvider.Get(id.ToString())).ConfigureAwait(false);
         }

@@ -36,9 +36,9 @@ namespace Aptacode.CSharp.Common.Persistence.Cache
             _cache.Set(key, entity);
         }
 
-        public void Remove(int id)
+        public void Remove(TKey key)
         {
-            _cache.Remove(id);
+            _cache.Remove(key);
         }
     }
 }

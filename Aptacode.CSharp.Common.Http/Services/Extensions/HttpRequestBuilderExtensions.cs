@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Aptacode.CSharp.Common.Http.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Newtonsoft.Json;
 
 namespace Aptacode.CSharp.Common.Http.Services.Extensions
@@ -24,11 +25,11 @@ namespace Aptacode.CSharp.Common.Http.Services.Extensions
             return requestMessage;
         }
 
-        public static HttpRequestMessage AddAuthentication(this HttpRequestMessage requestMessage,
+        public static HttpRequestMessage AddJwtAuthentication(this HttpRequestMessage requestMessage,
             IAccessTokenService accessTokenService)
         {
             requestMessage.Headers.Authorization =
-                new AuthenticationHeaderValue("Bearer", accessTokenService.AccessToken);
+                new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, accessTokenService.AccessToken);
             return requestMessage;
         }
 

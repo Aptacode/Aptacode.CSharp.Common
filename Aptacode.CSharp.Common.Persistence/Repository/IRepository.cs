@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 
 namespace Aptacode.CSharp.Common.Persistence.Repository
 {
-    public interface IRepository<TEntity> where TEntity : IEntity
+    public interface IRepository<in TKey, TEntity> where TEntity : IEntity<TKey>
     {
-        Task<int> Create(TEntity entity);
+        Task Create(TEntity entity);
 
         Task Update(TEntity entity);
 
         Task<IEnumerable<TEntity>> GetAll();
 
-        Task<TEntity> Get(int id);
+        Task<TEntity> Get(TKey id);
 
-        Task Delete(int id);
+        Task Delete(TKey id);
 
         IQueryable<TEntity> AsQueryable();
     }
