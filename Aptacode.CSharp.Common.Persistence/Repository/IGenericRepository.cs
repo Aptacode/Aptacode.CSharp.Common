@@ -5,14 +5,10 @@ namespace Aptacode.CSharp.Common.Persistence.Repository
 {
     public interface IGenericRepository<in TKey, TEntity> where TEntity : IEntity<TKey>
     {
-        Task Create(TEntity entity);
-
-        Task Update(TEntity entity);
-
-        Task<IReadOnlyCollection<TEntity>> GetAll();
-
-        Task<TEntity> Get(TKey id);
-
-        Task Delete(TKey id);
+        void Create(TEntity entity);
+        void Update(TEntity entity);
+        IReadOnlyCollection<TEntity> GetAll();
+        TEntity Get(TKey id);
+        void Delete(TKey id);
     }
 }
