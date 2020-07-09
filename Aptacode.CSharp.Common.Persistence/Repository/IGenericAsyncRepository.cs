@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Aptacode.CSharp.Common.Persistence.Repository
 {
-    public interface IGenericAsyncRepository<in TKey, TEntity> : IGenericRepository<TKey, TEntity>
+    public interface IGenericAsyncRepository<in TKey, TEntity>
         where TEntity : IEntity<TKey>
     {
         Task CreateAsync(TEntity entity);

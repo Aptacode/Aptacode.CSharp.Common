@@ -16,7 +16,7 @@ namespace Aptacode.CSharp.Common.Http.Services
             base(serviceClient, routeProvider, mapper) { }
     }
 
-    public class HttpServiceRepository<TKey, TGetViewModel, TPutViewModel, TEntity> : IGenericRepository<TKey, TEntity>
+    public class HttpServiceRepository<TKey, TGetViewModel, TPutViewModel, TEntity> : IGenericAsyncRepository<TKey, TEntity>
         where TEntity : IEntity<TKey>
     {
         protected readonly IMapper Mapper;
@@ -30,7 +30,7 @@ namespace Aptacode.CSharp.Common.Http.Services
             Mapper = mapper;
         }
 
-        public async Task Create(TEntity entity)
+        public async Task CreateAsync(TEntity entity)
         {
             var viewmodel = Mapper.Map<TPutViewModel>(entity);
             var result = await ServiceClient
@@ -38,7 +38,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 .ConfigureAwait(false);
         }
 
-        public async Task Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             var viewmodel = Mapper.Map<TPutViewModel>(entity);
 
@@ -48,7 +48,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReadOnlyCollection<TEntity>> GetAll()
+        public async Task<IReadOnlyCollection<TEntity>> GetAllAsync()
         {
             var result = await ServiceClient.Send<IEnumerable<TGetViewModel>>(HttpMethod.Get, RouteProvider.Get())
                 .ConfigureAwait(false);
@@ -56,22 +56,16 @@ namespace Aptacode.CSharp.Common.Http.Services
             return !result.HasValue ? null : result.Value.Select(r => Mapper.Map<TEntity>(r)).ToList();
         }
 
-        public async Task<TEntity> Get(TKey id)
+        public async Task<TEntity> GetAsync(TKey id)
         {
             var result = await ServiceClient.Send<TGetViewModel>(HttpMethod.Get, RouteProvider.Get(id.ToString()))
                 .ConfigureAwait(false);
             return Mapper.Map<TEntity>(result);
         }
 
-        public async Task Delete(TKey id)
+        public async Task DeleteAsync(TKey id)
         {
             await ServiceClient.Send<bool>(HttpMethod.Delete, RouteProvider.Get(id.ToString())).ConfigureAwait(false);
-        }
-
-        public IQueryable<TEntity> AsQueryable()
-        {
-            var result = GetAll().Result;
-            return result?.Select(r => Mapper.Map<TEntity>(r)).AsQueryable();
         }
     }
 }

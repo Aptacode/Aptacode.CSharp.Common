@@ -19,12 +19,7 @@ namespace Aptacode.CSharp.Common.Persistence.Specification
                 return specification;
             }
 
-            if (specification == All)
-            {
-                return this;
-            }
-
-            return new AndSpecification<T>(this, specification);
+            return specification == All ? this : new AndSpecification<T>(this, specification);
         }
 
         public Specification<T> Or(Specification<T> specification)
