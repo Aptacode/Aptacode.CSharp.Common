@@ -16,7 +16,7 @@ namespace Aptacode.CSharp.Common.Http.Services
             base(serviceClient, routeProvider, mapper) { }
     }
 
-    public class HttpServiceRepository<TKey, TGetViewModel, TPutViewModel, TEntity> : IRepository<TKey, TEntity>
+    public class HttpServiceRepository<TKey, TGetViewModel, TPutViewModel, TEntity> : IGenericRepository<TKey, TEntity>
         where TEntity : IEntity<TKey>
     {
         protected readonly IMapper Mapper;
@@ -48,7 +48,7 @@ namespace Aptacode.CSharp.Common.Http.Services
                 .ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public async Task<IReadOnlyCollection<TEntity>> GetAll()
         {
             var result = await ServiceClient.Send<IEnumerable<TGetViewModel>>(HttpMethod.Get, RouteProvider.Get())
                 .ConfigureAwait(false);
