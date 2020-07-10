@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Aptacode.CSharp.Common.Persistence.Specification.Composition
+namespace Aptacode.CSharp.Common.Patterns.Specification
 {
-    internal sealed class NotSpecification<T> : Specification<T>
+    public sealed class NotSpecification<T> : Specification<T>
     {
         private readonly Specification<T> _specification;
 
