@@ -20,9 +20,12 @@ namespace Aptacode.CSharp.Common.Patterns.Specification
             var leftExpression = _left.ToExpression();
             var rightExpression = _right.ToExpression();
 
-            var andExpression = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
+            var paramExpr = Expression.Parameter(typeof(T));
+            var exprBody = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
+            exprBody = (BinaryExpression)new ParameterReplacer(paramExpr).Visit(exprBody);
+            var finalExpr = Expression.Lambda<Func<T, bool>>(exprBody, paramExpr);
 
-            return Expression.Lambda<Func<T, bool>>(andExpression, leftExpression.Parameters.Single());
+            return finalExpr;
         }
     }
 }

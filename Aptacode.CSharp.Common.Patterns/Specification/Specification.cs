@@ -7,7 +7,11 @@ namespace Aptacode.CSharp.Common.Patterns.Specification
     {
         public static readonly Specification<T> All = new IdentitySpecification<T>();
 
-        public bool IsSatisfiedBy(T entity) => ToExpression().Compile().Invoke(entity);
+        public bool IsSatisfiedBy(T entity)
+        {
+            var predicate = ToExpression().Compile();
+            return predicate(entity);
+        }
 
         public abstract Expression<Func<T, bool>> ToExpression();
 
