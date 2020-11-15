@@ -1,30 +1,33 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Aptacode.CSharp.Common.Patterns.Specification
 {
     public sealed class OrSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> _left;
-        private readonly Specification<T> _right;
+        public Specification<T> Left { get; set; }
+        public Specification<T> Right { get; set; }
 
         public OrSpecification(Specification<T> left, Specification<T> right)
         {
-            _right = right;
-            _left = left;
+            Right = right;
+            Left = left;
+        }
+        public OrSpecification() : this(new NullSpecification<T>(), new NullSpecification<T>())
+        {
+
         }
 
         public override Expression<Func<T, bool>> ToExpression()
         {
-            var leftExpression = _left.ToExpression();
-            var rightExpression = _right.ToExpression();
+            var leftExpression = Left.ToExpression();
+            var rightExpression = Right.ToExpression();
+
             var paramExpr = Expression.Parameter(typeof(T));
             var exprBody = Expression.OrElse(leftExpression.Body, rightExpression.Body);
             exprBody = (BinaryExpression)new ParameterReplacer(paramExpr).Visit(exprBody);
-            var finalExpr = Expression.Lambda<Func<T, bool>>(exprBody, paramExpr);
 
-            return finalExpr;
+            return Expression.Lambda<Func<T, bool>>(exprBody, paramExpr);
         }
     }
 }

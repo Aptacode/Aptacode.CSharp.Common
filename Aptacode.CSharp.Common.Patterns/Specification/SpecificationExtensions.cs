@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-
-namespace Aptacode.CSharp.Common.Patterns.Specification {
-    public static class SpecificationBuilder
+﻿namespace Aptacode.CSharp.Common.Patterns.Specification {
+    public static class SpecificationExtensions
     {
         public static Specification<T> And<T>(this Specification<T> left, Specification<T> right)
         {
@@ -13,7 +11,7 @@ namespace Aptacode.CSharp.Common.Patterns.Specification {
             return left == right ? left : new OrSpecification<T>(left, right);
         }
 
-        public static Specification<T> Identity<T>()
+        public static Specification<T> All<T>()
         {
             return new IdentitySpecification<T>();
         }

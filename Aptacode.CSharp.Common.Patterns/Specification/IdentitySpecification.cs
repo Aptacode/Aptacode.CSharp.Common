@@ -7,7 +7,7 @@ namespace Aptacode.CSharp.Common.Patterns.Specification
     {
         public override Expression<Func<T, bool>> ToExpression()
         {
-            return x => true;
+            return _ => true;
         }
     }
 }
