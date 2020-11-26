@@ -48,7 +48,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer">
-      <Version>3.1.5</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
